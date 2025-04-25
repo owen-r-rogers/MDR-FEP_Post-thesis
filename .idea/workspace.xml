@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3361cc1d-ce46-4d07-85a3-56fed9fadcde" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/miniconda3/lib/python3.12/site-packages/pandas/core/indexing.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="showPreview" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2k4MaFSjGBI54IE2jJm4hbrU1Mz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortKey" value="BY_TIME_DESCENDING" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.ensemble-testing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mdr-4.0.executor&quot;: &quot;Run&quot;,
+    &quot;Python.post_analysis.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sandbox.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/owenrogers/PycharmProjects/MDRFEP&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/Downloads" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/thesis" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.mdr-4.0">
+    <configuration name="mdr-4.0" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MDRFEP-dev" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mdr-4.0.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="post_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MDRFEP-dev" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/post_analysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sandbox" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MDRFEP-dev" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sandbox.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.mdr-4.0" />
+        <item itemvalue="Python.sandbox" />
+        <item itemvalue="Python.post_analysis" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3361cc1d-ce46-4d07-85a3-56fed9fadcde" name="Changes" comment="" />
+      <created>1722538456809</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1722538456809</updated>
+      <workItem from="1722538458002" duration="9625000" />
+      <workItem from="1722561999399" duration="415000" />
+      <workItem from="1722603126869" duration="1383000" />
+      <workItem from="1722629751832" duration="1417000" />
+      <workItem from="1723045367662" duration="7660000" />
+      <workItem from="1724249080873" duration="8845000" />
+      <workItem from="1724258200664" duration="388000" />
+      <workItem from="1724264180468" duration="30000" />
+      <workItem from="1724264215491" duration="23798000" />
+      <workItem from="1724511003141" duration="2803000" />
+      <workItem from="1724764359400" duration="17347000" />
+      <workItem from="1724851950017" duration="172000" />
+      <workItem from="1724853294407" duration="301000" />
+      <workItem from="1724855240469" duration="4268000" />
+      <workItem from="1724859544191" duration="4334000" />
+      <workItem from="1724864105314" duration="31502000" />
+      <workItem from="1724956218135" duration="9133000" />
+      <workItem from="1725021877593" duration="8972000" />
+      <workItem from="1725282310262" duration="26434000" />
+      <workItem from="1725373136261" duration="22558000" />
+      <workItem from="1725413484912" duration="3916000" />
+      <workItem from="1725454712748" duration="3445000" />
+      <workItem from="1725459176337" duration="558000" />
+      <workItem from="1725459743560" duration="54221000" />
+      <workItem from="1725657451581" duration="19941000" />
+      <workItem from="1725848123236" duration="13948000" />
+      <workItem from="1725899700855" duration="5312000" />
+      <workItem from="1725909476717" duration="106700000" />
+      <workItem from="1726260482458" duration="12313000" />
+      <workItem from="1726491936007" duration="24461000" />
+      <workItem from="1726586109220" duration="9926000" />
+      <workItem from="1726598041906" duration="1497000" />
+      <workItem from="1726599546369" duration="47000" />
+      <workItem from="1726599601247" duration="160000" />
+      <workItem from="1726599770916" duration="14314000" />
+      <workItem from="1726664102114" duration="21354000" />
+      <workItem from="1726687956701" duration="1645000" />
+      <workItem from="1726689973743" duration="394000" />
+      <workItem from="1726694124810" duration="2909000" />
+      <workItem from="1741920628136" duration="406000" />
+      <workItem from="1741921037425" duration="10000" />
+      <workItem from="1742303117780" duration="25000" />
+      <workItem from="1745278488241" duration="721000" />
+      <workItem from="1745608969254" duration="15000" />
+      <workItem from="1745608984849" duration="65000" />
+      <workItem from="1745609054928" duration="21000" />
+      <workItem from="1745609076931" duration="16000" />
+      <workItem from="1745609098111" duration="5000" />
+      <workItem from="1745609122310" duration="9000" />
+      <workItem from="1745609149992" duration="688000" />
+      <workItem from="1745614707707" duration="2000" />
+      <workItem from="1745614724804" duration="43000" />
+      <workItem from="1745614779010" duration="13000" />
+      <workItem from="1745614801536" duration="230000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MDRFEP_dev$post_analysis.coverage" NAME="post_analysis Coverage Results" MODIFIED="1725376818599" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MDRFEP_dev$mdr_4_0.coverage" NAME="mdr-4.0 Coverage Results" MODIFIED="1726694846671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MDRFEP_dev$ensemble_testing.coverage" NAME="ensemble-testing Coverage Results" MODIFIED="1726695212132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/thesis" />
+    <SUITE FILE_PATH="coverage/MDRFEP_dev$sandbox.coverage" NAME="sandbox Coverage Results" MODIFIED="1726084917996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

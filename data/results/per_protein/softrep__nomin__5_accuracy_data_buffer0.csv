@@ -1,0 +1,13 @@
+region,accuracy,method
+Overall,0.7799714557564225,MDR-FEP
+Overall,0.6941008563273073,Cao et al.
+Interface Core,0.717948717948718,MDR-FEP
+Interface Core,0.650887573964497,Cao et al.
+Interface Boundary,0.6090775988286969,MDR-FEP
+Interface Boundary,0.47144948755490484,Cao et al.
+Monomer Core,0.8150851581508516,MDR-FEP
+Monomer Core,0.7104622871046229,Cao et al.
+Monomer Boundary,0.7569060773480663,MDR-FEP
+Monomer Boundary,0.716390423572744,Cao et al.
+Monomer Surface,0.8599151000606429,MDR-FEP
+Monomer Surface,0.7841115827774409,Cao et al.
