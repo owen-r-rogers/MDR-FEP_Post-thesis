@@ -390,7 +390,7 @@ cats = ['is_interface_core', 'is_interface_boundary', 'is_monomer_core',
         'is_monomer_boundary', 'is_monomer_surface']
 
 
-def plot_results(plotting_df, file_name, protein_title_name, ideal_beta, max_corr):
+def plot_results(plotting_df, file_name, protein_title_name, ideal_beta, max_corr, directory='.'):
     """
     Function to plot the output of the grid_search().
     """
@@ -436,7 +436,7 @@ def plot_results(plotting_df, file_name, protein_title_name, ideal_beta, max_cor
     plt.xlabel(r'$∆∆G_{\text{Experimental}}$', fontsize=24)
     plt.ylabel(r'$∆∆E_{\text{MDRFEP}}$', fontsize=24)
     plt.grid(False)
-    plt.savefig(f'{file_name}.png', dpi=300, transparent=True)
+    plt.savefig(f'{directory}/{file_name}.png', dpi=300, transparent=True)
     plt.close()
 
 
@@ -759,30 +759,30 @@ def grid_search(all_protein_df,
     intcore_to_plot = to_plot[to_plot['is_interface_core'] == True]
     intcore_corr = pearsonr(intcore_to_plot['ddg_rosetta'], intcore_to_plot['delta_exp_ddg_center'])
     plot_results(intcore_to_plot, f'{conditions_name}_intcore', f'Interface core', ideal_beta,
-                     f'{intcore_corr.statistic}')
+                     f'{intcore_corr.statistic}', directory)
 
     intbound_to_plot = to_plot[to_plot['is_interface_boundary'] == True]
     intbound_corr = pearsonr(intbound_to_plot['ddg_rosetta'], intbound_to_plot['delta_exp_ddg_center'])
     plot_results(intbound_to_plot, f'{conditions_name}_intbound', f'Interface boundary', ideal_beta,
-                     f'{intbound_corr.statistic}')
+                     f'{intbound_corr.statistic}', directory)
 
     moncore_to_plot = to_plot[to_plot['is_monomer_core'] == True]
     moncore_corr = pearsonr(moncore_to_plot['ddg_rosetta'], moncore_to_plot['delta_exp_ddg_center'])
     plot_results(moncore_to_plot, f'{conditions_name}_moncore', f'Monomer core', ideal_beta,
-                     f'{moncore_corr.statistic}')
+                     f'{moncore_corr.statistic}', directory)
 
     monbound_to_plot = to_plot[to_plot['is_monomer_boundary'] == True]
     monbound_corr = pearsonr(monbound_to_plot['ddg_rosetta'], monbound_to_plot['delta_exp_ddg_center'])
     plot_results(monbound_to_plot, f'{conditions_name}_monbound', f'Monomer boundary', ideal_beta,
-                     f'{monbound_corr.statistic}')
+                     f'{monbound_corr.statistic}', directory)
 
     monsurf_to_plot = to_plot[to_plot['is_monomer_surface'] == True]
     monsurf_corr = pearsonr(monsurf_to_plot['ddg_rosetta'], monsurf_to_plot['delta_exp_ddg_center'])
     plot_results(monsurf_to_plot, f'{conditions_name}_monsurf', f'Monomer surface', ideal_beta,
-                     f'{monsurf_corr.statistic}')
+                     f'{monsurf_corr.statistic}', directory)
 
     plotting_df = to_plot[['ddg_rosetta', 'delta_exp_ddg_center', 'delta_exp_ddg_lb', 'delta_exp_ddg_ub']].copy()
 
-    plot_results(plotting_df, conditions_name, conditions_name, ideal_beta, max_corr)
+    plot_results(plotting_df, conditions_name, conditions_name, ideal_beta, max_corr, directory)
 
     return corr_df
