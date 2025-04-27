@@ -1,0 +1,5 @@
+*.py linguist-language=Python
+*.sh linguist-language=Shell
+*.sc linguist-detectable=false
+*.ipynb linguist-language=Jupyter
+./data/** linguist-generated
