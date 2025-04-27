@@ -22,6 +22,16 @@ Where each directory has the .npz files for both the monomer and dimer of EACH m
     
 """
 
+
+# for cleaner naming
+naming_dict = {
+    'hardrep__min__5': 'Hardrep w/ minimization',
+    'hardrep__nomin__5': 'Hardrep w/o minimization',
+    'softrep__min__5': 'Softrep w/ minimization',
+    'softrep__nomin__5': 'Softrep w/o minimization'
+}
+
+
 # This dictionary is mostly for cosmetics, it's referenced for the titles of the graphs since the design names are super long
 protein_dict = {
     'bcov_v3_r3_ems_3hC_436_0002_000000017_0001_0001_47_64_H_.._ems_p1-15H-GBL-16H-GABBL-16H_0382_0001_0001_0001_0001_0001_0001_0001_0001': 'IL-7ra',
