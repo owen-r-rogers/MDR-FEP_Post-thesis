@@ -8,6 +8,16 @@ import pyrosetta
 from matplotlib.colors import ListedColormap
 
 
+# dictionary for making cleaner names in graphs
+naming_dict = {
+    'hardrep__min__5': 'Hardrep w/ minimization',
+    'hardrep__nomin__5': 'Hardrep w/o minimization',
+    'softrep__min__5': 'Softrep w/ minimization',
+    'softrep__nomin__5': 'Softrep w/o minimization'
+}
+
+
+# dictionary for making cleaner names in graphs
 protein_dict = {
     'bcov_v3_r3_ems_3hC_436_0002_000000017_0001_0001_47_64_H_.._ems_p1-15H-GBL-16H-GABBL-16H_0382_0001_0001_0001_0001_0001_0001_0001_0001': 'IL-7ra',
     'Motif1400_ems_3hM_482_0001_7396_0001': 'FGFR2',
@@ -206,21 +216,22 @@ def fill_heatmap(monomer_seq, dimer_seq, dimer_npz, monomer_npz, beta=0.1):
     cmap[CMAP_BLACK] = np.array([0, 0, 0, 1])
     colorbar = matplotlib.colors.ListedColormap(cmap)
 
-    # extract aa sequences and make sure you ran MDR correctly.
-    monomer_sequence = []
-    with open(monomer_seq) as ms:
-        for line in ms:
-            strip = line.strip().split()
-            monomer_sequence.append(strip[0])
+    # # extract aa sequences and make sure you ran MDR correctly.
+    # monomer_sequence = []
+    # with open(monomer_seq) as ms:
+    #     for line in ms:
+    #         strip = line.strip().split()
+    #         monomer_sequence.append(strip[0])
+    #
+    # dimer_sequence = []
+    # with open(dimer_seq) as ds:
+    #     for line in ds:
+    #         strip = line.strip().split()
+    #         dimer_sequence.append(strip[0])
 
-    dimer_sequence = []
-    with open(dimer_seq) as ds:
-        for line in ds:
-            strip = line.strip().split()
-            dimer_sequence.append(strip[0])
-
-    assert len(monomer_sequence) == len(dimer_sequence)
-    ref_sequence = monomer_sequence[0]
+    assert len(monomer_seq) == len(dimer_seq)
+    ref_sequence = monomer_seq
+    print(ref_sequence)
 
     # load dimer and monomer npz file
     dimer = np.load(dimer_npz)
@@ -327,10 +338,7 @@ def plot_heatmap(heatmap, title, label, ddg_df, save_name=None):
     f.tight_layout()
 
     if not save_name is None:
-        os.makedirs("./figs", exist_ok=True)
-        plt.savefig(f"./figs/{save_name}.png", dpi=300, facecolor='w', edgecolor='w', orientation='portrait',
+        plt.savefig(f"/Users/owenrogers/PycharmProjects/MDRFEP/data/heatmaps/{save_name}.png", dpi=300, facecolor='w', edgecolor='w', orientation='portrait',
                     bbox_inches='tight')
 
     plt.show()
-
-

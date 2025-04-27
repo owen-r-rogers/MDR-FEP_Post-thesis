@@ -440,7 +440,13 @@ def plot_results(plotting_df, file_name, protein_title_name, ideal_beta, max_cor
     plt.close()
 
 
-def grid_search(all_protein_df, conditions_name, beta_lb=0, beta_ub=0.1, beta_step=0.0001, metric_of_interest='correlation'):
+def grid_search(all_protein_df,
+                conditions_name,
+                beta_lb=0,
+                beta_ub=0.1,
+                beta_step=0.0001,
+                metric_of_interest='correlation',
+                directory='.'):
     """
     Performs a 1-D grid search over all specified values of Beta.
     :param all_protein_df: pd.DataFrame object containing MDR-FEP and experimental data for all miniprotein binders
@@ -452,7 +458,7 @@ def grid_search(all_protein_df, conditions_name, beta_lb=0, beta_ub=0.1, beta_st
     :return: A dataframe containing (mostly) complete results. I say mostly only because this outputs so many files as is, so usually I don't do anything with this dataframe
     """
     # save all_protein_df for later plotting
-    all_protein_df.to_csv(f'all_data_{conditions_name}.csv', index=False)
+    all_protein_df.to_csv(f'{directory}/all_data_{conditions_name}.csv', index=False)
 
     # big, big dictionary
     correlations = {
@@ -662,7 +668,7 @@ def grid_search(all_protein_df, conditions_name, beta_lb=0, beta_ub=0.1, beta_st
         correlations['accuracy_newr1'].append(np.sum(complete_df[complete_df['ssm_parent'] == protein_list[4]]['mdrfep_agrees']) / len(complete_df[complete_df['ssm_parent'] == protein_list[4]]))
 
     corr_df = pd.DataFrame(correlations)
-    corr_df.to_csv(f'correlations_{conditions_name}.sc', index=False)
+    corr_df.to_csv(f'{directory}/correlations_{conditions_name}.sc', index=False)
 
     # go through the rest and save that plot
     ''' Go through one 'unit' of the above grid search with the ideal beta value '''
@@ -736,7 +742,7 @@ def grid_search(all_protein_df, conditions_name, beta_lb=0, beta_ub=0.1, beta_st
     | np.isnan(for_output['delta_exp_ddg_ub'].values))
     for_output['mdrfep_agrees'] = mdrfep_agrees
 
-    for_output.to_csv(f'{conditions_name}_mdrfep_output.sc', index=False)
+    for_output.to_csv(f'{directory}/{conditions_name}_mdrfep_output.sc', index=False)
 
     to_plot = ideal_df.copy()
     to_plot = to_plot[
@@ -748,7 +754,7 @@ def grid_search(all_protein_df, conditions_name, beta_lb=0, beta_ub=0.1, beta_st
 
     # take out cysteines if not already done
     to_plot = to_plot[~(to_plot['ssm_letter'] == 'C')].copy()
-    to_plot.to_csv(f'for_plotting_{conditions_name}.sc', index=False)
+    to_plot.to_csv(f'{directory}/for_plotting_{conditions_name}.sc', index=False)
 
     intcore_to_plot = to_plot[to_plot['is_interface_core'] == True]
     intcore_corr = pearsonr(intcore_to_plot['ddg_rosetta'], intcore_to_plot['delta_exp_ddg_center'])
