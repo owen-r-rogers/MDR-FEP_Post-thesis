@@ -5,13 +5,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3361cc1d-ce46-4d07-85a3-56fed9fadcde" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/MDRFEP-dev.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/create_heatmap.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/create_heatmap.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/mdr_analysis_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/plotting_explanation_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/results/all_proteins/softrep__min__5/bcov_v3_r3_ems_3hC_436_0002_000000017_0001_0001_47_64_H_.._ems_p1-15H-GBL-16H-GABBL-16H_0382_0001_0001_0001_0001_0001_0001_0001_0001.seq" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/all_data_hardrep__min__5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/all_data_hardrep__nomin__5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/all_data_softrep__nomin__5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/correlations_hardrep__min__5.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/correlations_hardrep__nomin__5.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/correlations_softrep__min__5.sc" beforeDir="false" afterPath="$PROJECT_DIR$/data/grid_search_results/correlations_softrep__min__5.sc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/correlations_softrep__nomin__5.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/fgfr2_dist.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/for_plotting_hardrep__min__5.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/for_plotting_hardrep__nomin__5.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/for_plotting_softrep__min__5.sc" beforeDir="false" afterPath="$PROJECT_DIR$/data/grid_search_results/for_plotting_softrep__min__5.sc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/for_plotting_softrep__nomin__5.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__min__5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__min__5_intbound.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__min__5_intcore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__min__5_monbound.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__min__5_moncore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__min__5_monsurf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__nomin__5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__nomin__5_intbound.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__nomin__5_intcore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__nomin__5_monbound.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__nomin__5_moncore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/hardrep__nomin__5_monsurf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/il7ra_dist.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/intcore_density_vs_size.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/interface_core_size.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/interface_core_size_hydrophobic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/interfacecore_hydrophobes_corr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/mdrfep_data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/moncore_density_vs_size.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/monomer_core_size.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/monomer_core_size_hydrophobic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/monomer_surface_plots.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/monomercore_hydrophobes_corr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/monsurf_kde_hardrep__min__5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/monsurf_kde_hardrep__nomin__5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/monsurf_kde_softrep__min__5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/monsurf_kde_softrep__nomin__5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/mutation_density.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/plots_hardrep__min__5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/plots_hardrep__nomin__5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/plots_softrep__min__5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/plots_softrep__nomin__5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__min__5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__min__5_intbound.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__min__5_intcore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__min__5_monbound.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__min__5_moncore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__min__5_monsurf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__nomin__5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__nomin__5_intbound.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__nomin__5_intcore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__nomin__5_monbound.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__nomin__5_moncore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/softrep__nomin__5_monsurf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/ssm_correlation_for_plotting.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/trka_dist.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/volume_change_matrix.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/whole_hydrophobes_corr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/wholeprotein_all_size.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/wholeprotein_hydroiphobc_size.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/grid_search_results/wholeprotein_size.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main/grid_search.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main/grid_search.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -226,7 +284,7 @@
       <workItem from="1745614801536" duration="230000" />
       <workItem from="1745615038423" duration="137000" />
       <workItem from="1745615182035" duration="5002000" />
-      <workItem from="1745788777180" duration="324000" />
+      <workItem from="1745788777180" duration="1063000" />
     </task>
     <servers />
   </component>
