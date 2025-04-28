@@ -765,6 +765,7 @@ def grid_search(all_protein_df,
 
     # take out cysteines if not already done
     to_plot = to_plot[~(to_plot['ssm_letter'] == 'C')].copy()
+    to_plot['beta'] = np.repeat(ideal_beta, len(to_plot))
     to_plot.to_csv(f'{directory}/for_plotting_{conditions_name}.sc', index=False)
 
     intcore_to_plot = to_plot[to_plot['is_interface_core'] == True]
