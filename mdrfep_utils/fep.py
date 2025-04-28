@@ -751,6 +751,7 @@ def grid_search(all_protein_df,
     mdrfep_agrees &= ((for_output['ddg_mdrfep_lb'].values - 1 < for_output['delta_exp_ddg_ub'].values)
     | np.isnan(for_output['delta_exp_ddg_ub'].values))
     for_output['mdrfep_agrees'] = mdrfep_agrees
+    for_output['beta'] = np.repeat(ideal_beta, len(for_output))
 
     for_output.to_csv(f'{directory}/{conditions_name}_mdrfep_output.sc', index=False)
 
