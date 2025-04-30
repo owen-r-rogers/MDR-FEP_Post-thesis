@@ -570,7 +570,20 @@ def main(args):
     block_size = args.block_size
 
     # create the dictionary of mutations to perform
-    ssm_mutations = create_ssm_dict(ref_pose, chain_to_mutate)
+    if args.ssm:
+        mutations = create_ssm_dict(ref_pose, chain_to_mutate)
+    else:
+        muts = args.mutations
+        mutations = {}
+
+        for mut in muts:
+            seqpos = int(mut[:-1])
+            mutaa = mut[-1]
+
+            if seqpos not in mutations:
+                mutations[seqpos] = []
+
+            mutations[seqpos].append(mutaa)
 
     # main function execution
     if args.minimize:
@@ -580,7 +593,7 @@ def main(args):
 
     # process packer
     packer = args.packer
-    process_ensemble(pdb_house, resfile_house, ssm_mutations, block_size, minimize, packer)
+    process_ensemble(pdb_house, resfile_house, mutations, block_size, minimize, packer)
 
     # concatenate arrays into list
     files = [f for f in listdir(getcwd()) if fm.fnmatch(f, '????.npz')]
@@ -598,9 +611,13 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='In silico mutagenesis with MDR')
 
-    # misc and packing control
     parser.add_argument("-n", '--name', default='', type=str, help='The name of the output file, usually based on the simulation, kind of arbitrary')
+
+    # packing control
     parser.add_argument('--minimize', action='store_true', default=False, help='Perform gradient-based sidechain minimization')
+    ssm_flags = parser.add_mutually_exclusive_group()
+    ssm_flags.add_argument('--ssm', action='store_true', default=False, help='Perform SSM')
+    ssm_flags.add_argument('--mutations', type=str, default=None, nargs='+', help='Perform specific mutations instead of SSM')
 
     # scoring control
     parser.add_argument('--beta', action='store_true', default=False, help='Pass if you want to use the beta_nov16 score function instead of ref2015')
