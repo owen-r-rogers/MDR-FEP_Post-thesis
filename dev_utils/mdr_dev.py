@@ -20,7 +20,7 @@ MDR
 Parallelized, much faster
 for in silico deep mutagenesis
 
-Developmental version
+Developmental version.
 """
 
 
@@ -41,7 +41,7 @@ def parse_pdb(pdb_file):
 
 def string_to_pose(pdb_string):
     """
-    Takes the output of parse_pdb and converts it to a PyRosetta pose object. Necessary because Rosetta and PDB have slightly different naming conventions.
+    Takes the output of parse_pdb and converts it to a PyRosetta pose object.
     :param pdb_string: Output of parse_pdb()
     :return: pose object
     """
@@ -60,7 +60,7 @@ def string_to_pose(pdb_string):
 
 def create_ssm_dict(ref_pose, chain_id):
     """
-    Make a dictionary in the format: [seqpos to mutate]: [acceptable AA mutations]. This will be processed later and dictate which amino acid mutations are carried out.
+    Make a dictionary in the format: [seqpos to mutate]: [acceptable AA mutations]
     :param ref_pose: Reference pose object
     :param chain_id: The chain to mutate
     :return: SSM dictionary
@@ -98,16 +98,15 @@ def score_pose(pose, score_function):
 
 def minimize_sidechains(pose, score_function):
     """
-    Optional function. Creates a MoveMap and then performs gradient-based energy minimization, keeping the backbone fixed.
-    Results in the code being significantly slower.
+    Optional function. Creates a movemap and then performs energy minimization.
+    Can result in the code being significantly slower.
     :param pose: Pose object
     :param score_function: Score function to evaluate
     :return: None
     """
-
     # create MoveMap
     move_map = MoveMap()
-    move_map.set_bb(False)  # Do NOT move backbone torsion angles
+    move_map.set_bb(False)  # performs side-chain minimization
     move_map.set_chi(True)
 
     # Apply the mover
@@ -121,16 +120,15 @@ def minimize_sidechains(pose, score_function):
 
 def pack_rotamers(pose, seqpos, mutation, score_function, seqpos_resfile, minimize):
     """
-    This is the core function of the R part of MDR-FEP.
+    This is the core function of MDR.
     :param pose: Pose object
     :param seqpos: Sequence position of interest
-    :param mutation: AA to mutate current WT to
+    :param mutation: AA to mutate current WT
     :param score_function
     :param seqpos_resfile: The .resfile corresponding to this seqpos
     :param minimize: Boolean
-    :return: The ∆Energy of introducing this mutation at this residue.
+    :return: The ∆Energy of introducting this mutation at this residue.
     """
-
     # clone the WT and MUT pose so they are packed independently
     wt_pose = pose.clone()
     mut_pose = pose.clone()
@@ -172,7 +170,7 @@ def pack_rotamers(pose, seqpos, mutation, score_function, seqpos_resfile, minimi
     # score the WT
     score_wt = score_pose(wt_pose, score_function)
 
-    # Do the same for the mutant
+    # --- Do the same for the mutant
     mutate_residue(mut_pose, seqpos, mutation)
 
     # create and apply a mutant mover
@@ -199,14 +197,84 @@ def pack_rotamers(pose, seqpos, mutation, score_function, seqpos_resfile, minimi
     return delta_energy
 
 
-def deep_mut(pose, resfile_dir, mutation_dictionary, minimize):
+def rotamer_trials_mm(pose, seqpos, mutation, score_function, seqpos_resfile, minimize):
     """
-    Uses the pose, resfile directory and the mutation dictionary to carry out deep mutagenesis. Essentially this iterates through the mutation dictionary and performs the pack_rotamers function, storing the results in the delta_energy_dict.
+    Identical to pack_rotamers() function but uses a different Mover.
+    """
+
+    # Clone the WT and MUT poses.
+    wt_pose = pose.clone()
+    mut_pose = pose.clone()
+
+    print(f'Processing {seqpos_resfile} for position {seqpos}', flush=True)
+    print(f'Native structure score: {score_pose(wt_pose, score_function)}', flush=True)
+
+    # initialize TaskFactory
+    tf = TaskFactory()
+    tf.push_back(operation.InitializeFromCommandline())
+    tf.push_back(operation.RestrictToRepacking())
+    tf.push_back(operation.ExtraRotamersGeneric())
+    tf.push_back(operation.NoRepackDisulfides())
+    tf.push_back(operation.UseMultiCoolAnnealer(states=10))
+
+    # read resfile
+    parse_rf = operation.ReadResfile(seqpos_resfile)
+    tf.push_back(parse_rf)
+
+    # create a packer task
+    wt_packer_task = tf.create_task_and_apply_taskoperations(wt_pose)
+
+    # create and apply a mover
+    wt_mover = pack_min.RotamerTrialsMinMover(score_function, wt_packer_task)
+    wt_mover.apply(wt_pose)
+
+    print(wt_mover.info(), flush=True)
+    print(f'WT score after packing: {score_pose(wt_pose, score_function)}', flush=True)
+
+    # Optionally minimize
+    if minimize:
+        minimize_sidechains(wt_pose, score_function)
+        print(f'WT score after minimization: {score_pose(wt_pose, score_function)}', flush=True)
+
+    # score WT
+    score_wt = score_pose(wt_pose, score_function)
+
+    # Repeat process for the mutant
+    mutate_residue(mut_pose, seqpos, mutation)
+
+    # create packer task and apply it to the MUT pose.
+    mut_packer_task = tf.create_task_and_apply_taskoperations(mut_pose)
+    mut_mover = pack_min.RotamerTrialsMinMover(score_function, mut_packer_task)
+    mut_mover.apply(mut_pose)
+
+    print(mut_mover.info(), flush=True)
+    print(f'MUT score after packing: {score_pose(mut_pose, score_function)}', flush=True)
+
+    # Optionally minimize
+    if minimize:
+        minimize_sidechains(mut_pose, score_function)
+        print(f'MUT score after minimization: {score_pose(mut_pose, score_function)}', flush=True)
+
+    # score the MUT
+    score_mut = score_pose(mut_pose, score_function)
+
+    # Calculate the dE
+    delta_energy = score_mut - score_wt
+
+    return delta_energy
+
+
+def deep_mut(pose, resfile_dir, mutation_dictionary, minimize, packer):
+    """
+    Uses the pose, resfile directory and the mutation dictionary
+    to carry out deep mutagenesis. Essentially this iterates through the mutation
+    dictionary and performs the pack_rotamers function, storing
+    the results in the delta_energy_dict.
     :param pose
-    :param resfile_dir: Directory containing the resfiles. Set as an environmental variable later on.
+    :param resfile_dir
     :param mutation_dictionary: Output of create_ssm_dict()
     :param minimize: Boolean
-    :return: Dictionary of delta-energy values for the entire pose.
+    :return: Dictionary of delta-energy values for EACH mutation.
     """
 
     print(f'Was this minimized? {minimize}', flush=True)
@@ -229,7 +297,11 @@ def deep_mut(pose, resfile_dir, mutation_dictionary, minimize):
             print(f'Processing mutation {mut} at position {seqpos}', flush=True)
 
             # PACK the residue
-            delta_energy = pack_rotamers(pose, seqpos, mut, rosetta.core.scoring.get_score_function(is_fullatom=True), seqpos_resfile=seqpos_resfile, minimize=minimize)
+            if packer == 'PackRotamersMover':
+                delta_energy = pack_rotamers(pose, seqpos, mut, rosetta.core.scoring.get_score_function(is_fullatom=True), seqpos_resfile=seqpos_resfile, minimize=minimize)
+            else:
+                delta_energy = rotamer_trials_mm(pose, seqpos, mut, rosetta.core.scoring.get_score_function(is_fullatom=True), seqpos_resfile=seqpos_resfile, minimize=minimize)
+
 
             # unique ID for storing
             # form of [WT name1] [seqpos] [MUT name 1]
@@ -247,7 +319,7 @@ def save_delta_energy_array(delta_energy_dict, frame_num):
     by deep_mut() for EACH frame.
     Each frame corresponds to a timepoint in the MD run.
     This .npz file will contain a single value for each (num AA * 19) mutation.
-    :param delta_energy_dict: Output of deep_mut()
+    :param delta_energy_dict:
     :param frame_num: timepoint of MD
     :return: None
     """
@@ -269,7 +341,7 @@ def split_fileset(file_list, block_size):
     return [file_list[i:i + block_size] for i in range(0, len(file_list), block_size)]
 
 
-def process_frame(pdb_dir, file, resfile_dir, mutation_dictionary, minimize):
+def process_frame(pdb_dir, file, resfile_dir, mutation_dictionary, minimize, packer):
     """
     Performs a per-frame deep mutagenesis.
     :param pdb_dir
@@ -277,19 +349,21 @@ def process_frame(pdb_dir, file, resfile_dir, mutation_dictionary, minimize):
     :param resfile_dir: Directory full of .resfile
     :param mutation_dictionary: create_ssm_dict() output
     :param minimize: Boolean
+    :param packer: PackRotamersMover by default.
     :return: None, because this function is executed within process_ensemble()
     """
 
     pdb_string = parse_pdb(path.join(pdb_dir, file))
     pose = string_to_pose(pdb_string)
-    delta_energy_dict = deep_mut(pose, resfile_dir, mutation_dictionary, minimize)
+    delta_energy_dict = deep_mut(pose, resfile_dir, mutation_dictionary, minimize, packer)
     frame_num = path.basename(file).replace('frame', '').replace('.pdb', '')
     save_delta_energy_array(delta_energy_dict, frame_num)
 
 
-def process_ensemble(pdb_dir, resfile_dir, mutation_dictionary, block_size, minimize):
+def process_ensemble(pdb_dir, resfile_dir, mutation_dictionary, block_size, minimize, packer='PackRotamersMover'):
     """
-    Processes the directory of .pdb files. Takes in a directory full of .pdb and .resfile, a mutation
+    Processes the directory of .pdb files. pack_rotamers is the unit this is
+    the building. Takes in a directory full of .pdb and .resfile, a mutation
     dictionary that says what residues to saturate, a block size
     detailing how to partition the files for SLURM, and a minimize boolean.
     :param pdb_dir
@@ -297,6 +371,7 @@ def process_ensemble(pdb_dir, resfile_dir, mutation_dictionary, block_size, mini
     :param mutation_dictionary: create_ssm_dict() output
     :param block_size: num files // block_size = number of SLURM arrays to request
     :param minimize: Boolean
+    :param packer: Either PRM or RTMM. Default is PackRotamersMover.
     :return: None
     """
 
@@ -316,10 +391,10 @@ def process_ensemble(pdb_dir, resfile_dir, mutation_dictionary, block_size, mini
 
         # iterate through them
         for file in block_to_process:
-            print(f'Processing {file}', flush=True)
+            print(f'Processing {file} using the packer {packer}', flush=True)
 
             # main function
-            process_frame(pdb_dir, file, resfile_dir, mutation_dictionary, minimize)
+            process_frame(pdb_dir, file, resfile_dir, mutation_dictionary, minimize, packer)
 
     else:
         sys.exit('SLURM_ARRAY_TASK_ID is greater than the number of blocks')
@@ -359,8 +434,8 @@ def compile_array(directory, name):
 def get_functional_state(pose):
     """
     Assigns extensions to the output files for convenience.
-    :param pose
-    :return: monomer/dimer etc based on chains present
+    :param pose: PyRosetta Pose object
+    :return: monomer/dimer etc. based on chains present
     """
     chain_count = pose.num_chains()
     if chain_count == 1:
@@ -503,12 +578,15 @@ def main(pirate_noises):
     else:
         minimize = False
 
-    process_ensemble(pdb_house, resfile_house, ssm_mutations, block_size, minimize)
+    # process packer
+    packer = pirate_noises.packer
+    process_ensemble(pdb_house, resfile_house, ssm_mutations, block_size, minimize, packer)
 
     # concatenate arrays into list
     files = [f for f in listdir(getcwd()) if fm.fnmatch(f, '????.npz')]
 
-    # num_files is by default the number of files returned by ls *.pdb
+    # num_files is by default the number of files
+    # returned by ls *.pdb
     if pirate_noises.num_files:
 
         # only compile the array once the job is finished
@@ -521,8 +599,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='In silico mutagenesis with MDR')
 
     # misc and packing control
-    parser.add_argument("-n", '--name', default='', type=str, help='The name of the simulation, kind of arbitrary')
-    parser.add_argument('--minimize', action='store_true', default=False, help='Perform sidechain minimization')
+    parser.add_argument("-n", '--name', default='', type=str, help='The name of the output file, usually based on the simulation, kind of arbitrary')
+    parser.add_argument('--minimize', action='store_true', default=False, help='Perform gradient-based sidechain minimization')
 
     # scoring control
     parser.add_argument('--beta', action='store_true', default=False, help='Pass if you want to use the beta_nov16 score function instead of ref2015')
@@ -532,8 +610,8 @@ if __name__ == "__main__":
     parser.add_argument('--soft-rep', action='store_true', default=False, help='Pass to dampen repulsive terms. Useful for cases with limited backbone flexibility')
 
     # output control
-    parser.add_argument('--block-size', default=50, type=int, help='The batch size to use')
-    parser.add_argument('--num-files', type=int, default=501, help='The number of files to process')
+    parser.add_argument('--block-size', default=50, type=int, help='The batch size to use when processing using SLURM array jobs. This is how many files will be processed by each array.')
+    parser.add_argument('--num-files', type=int, default=501, help='The total number of (pdb) files to process.')
 
     # output verbosity control
     parser.add_argument('--fatal', action='store_true', default=False, help='Log fatal errors only')
@@ -542,6 +620,9 @@ if __name__ == "__main__":
     parser.add_argument('--info', action="store_true", default=False, help='Log info and below')
     parser.add_argument('--debug', action="store_true", default=False, help='Log debug info and below')
     parser.add_argument('--trace', action="store_true", default=False, help='Log everything that is output. Will make HUGE files')
+
+    # Mover control
+    parser.add_argument('--packer', default='PackRotamersMover', type=str, help='Use the PackRotamersMover for rotamer packing. Supports PackRotamersMover and RotamerTrialsMinMover')
 
     args = parser.parse_args()
 
