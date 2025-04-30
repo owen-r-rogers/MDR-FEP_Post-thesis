@@ -512,25 +512,25 @@ def init_pyros(beta=False,
     init(flags)
 
 
-def main(pirate_noises):
+def main(args):
 
     # pyrosetta initialization arguments
-    init_pyros(pirate_noises.beta,
-               pirate_noises.talaris,
-               pirate_noises.beta_gen_pot,
-               pirate_noises.fatal,
-               pirate_noises.error,
-               pirate_noises.warning,
-               pirate_noises.info,
-               pirate_noises.debug,
-               pirate_noises.trace,
-               pirate_noises.soft_rep)
+    init_pyros(args.beta,
+               args.talaris,
+               args.beta_gen_pot,
+               args.fatal,
+               args.error,
+               args.warning,
+               args.info,
+               args.debug,
+               args.trace,
+               args.soft_rep)
 
     sfxn_name = pyrosetta.rosetta.core.scoring.get_score_functionName()
     print(f'Using the scorefunction: {sfxn_name}', flush=True)
 
     """ Define variables """
-    output_name = pirate_noises.name
+    output_name = args.name
 
     # set the environmental variables for the PDB_DIR and the RF_DIR
     # PDB_DIR - where the .pdb files to process are
@@ -542,7 +542,7 @@ def main(pirate_noises):
     resfile_house = environ.get('RF_DIR')
 
     # chain to saturate
-    chain_to_mutate = pirate_noises.chain
+    chain_to_mutate = args.chain
 
     # reference .pdb files to create a saturation dictionary
     ref_pdb = path.join(pdb_house, "frame0.pdb")
@@ -567,19 +567,19 @@ def main(pirate_noises):
     output_data_array = f'{output_name}_{chain_extension}.npz'
 
     # processing variables
-    block_size = pirate_noises.block_size
+    block_size = args.block_size
 
     # create the dictionary of mutations to perform
     ssm_mutations = create_ssm_dict(ref_pose, chain_to_mutate)
 
     # main function execution
-    if pirate_noises.minimize:
+    if args.minimize:
         minimize = True
     else:
         minimize = False
 
     # process packer
-    packer = pirate_noises.packer
+    packer = args.packer
     process_ensemble(pdb_house, resfile_house, ssm_mutations, block_size, minimize, packer)
 
     # concatenate arrays into list
@@ -587,10 +587,10 @@ def main(pirate_noises):
 
     # num_files is by default the number of files
     # returned by ls *.pdb
-    if pirate_noises.num_files:
+    if args.num_files:
 
         # only compile the array once the job is finished
-        if len(files) == pirate_noises.num_files:
+        if len(files) == args.num_files:
             compile_array(getcwd(), f'{output_data_array}')
 
 
