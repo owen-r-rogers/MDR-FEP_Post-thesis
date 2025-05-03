@@ -104,6 +104,7 @@ def minimize_sidechains(pose, score_function):
     :param score_function: Score function to evaluate
     :return: None
     """
+
     # create MoveMap
     move_map = MoveMap()
     move_map.set_bb(False)  # performs side-chain minimization
@@ -118,7 +119,7 @@ def minimize_sidechains(pose, score_function):
     min_mover.apply(pose)
 
 
-def pack_rotamers(pose, seqpos, mutation, score_function, seqpos_resfile, minimize):
+def pack_rotamers(pose, seqpos, mutation, score_function, seqpos_resfile, minimize, dump_pdb=False):
     """
     This is the core function of MDR.
     :param pose: Pose object
@@ -129,6 +130,7 @@ def pack_rotamers(pose, seqpos, mutation, score_function, seqpos_resfile, minimi
     :param minimize: Boolean
     :return: The ∆Energy of introducting this mutation at this residue.
     """
+
     # clone the WT and MUT pose so they are packed independently
     wt_pose = pose.clone()
     mut_pose = pose.clone()
@@ -158,6 +160,9 @@ def pack_rotamers(pose, seqpos, mutation, score_function, seqpos_resfile, minimi
     wt_mover = pack_min.PackRotamersMover(score_function, wt_packer_task, nloop=nloops)
     wt_mover.apply(wt_pose)
 
+    if dump_pdb:
+        wt_pose.dump_pdb(f'wt_{seqpos}{mutation}_{np.random.randint(0, 1000)}_packed.pdb')
+
     print(wt_mover.info(), flush=True)
     print(f'WT score after packing: {score_pose(wt_pose, score_function)}', flush=True)
 
@@ -177,6 +182,9 @@ def pack_rotamers(pose, seqpos, mutation, score_function, seqpos_resfile, minimi
     mut_packer_task = task_factory.create_task_and_apply_taskoperations(mut_pose)
     mut_mover = pack_min.PackRotamersMover(score_function, mut_packer_task, nloop=nloops)
     mut_mover.apply(mut_pose)
+
+    if dump_pdb:
+        mut_pose.dump_pdb(f'mut_{seqpos}{mutation}_{np.random.randint(0, 1000)}_packed.pdb')
 
     print(mut_mover.info(), flush=True)
     print(f'MUT score after packing: {score_pose(mut_pose, score_function)}', flush=True)
