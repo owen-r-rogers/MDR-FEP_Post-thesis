@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3361cc1d-ce46-4d07-85a3-56fed9fadcde" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev_utils/mdr_dev.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev_utils/mdr_dev.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/3.resfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/mut_3A_102_packed.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/wt_3A_641_packed.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/mdr_dev.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main/mdr_dev.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -244,6 +245,7 @@
       <workItem from="1745875808826" duration="10985000" />
       <workItem from="1746037941823" duration="903000" />
       <workItem from="1746038854618" duration="10262000" />
+      <workItem from="1746288259127" duration="3299000" />
     </task>
     <servers />
   </component>
