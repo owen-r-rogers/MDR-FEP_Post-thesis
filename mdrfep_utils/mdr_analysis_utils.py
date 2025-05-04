@@ -7,6 +7,11 @@ import seaborn as sns
 import pyrosetta
 from matplotlib.colors import ListedColormap
 
+"""
+Some functions listed here were based on:
+
+Cao, L., Coventry, B., Goreshnik, I. et al. Design of protein-binding proteins from the target structure alone. Nature 605, 551–560 (2022). https://doi.org/10.1038/s41586-022-04654-9
+"""
 
 # dictionary for making cleaner names in graphs
 naming_dict = {
