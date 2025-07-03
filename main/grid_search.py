@@ -1,5 +1,5 @@
 import argparse
-from grid_search_utils import *
+from mdrfep_utils.fep import *
 
 
 if __name__ == '__main__':
