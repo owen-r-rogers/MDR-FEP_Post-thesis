@@ -18,11 +18,7 @@ from pyrosetta.rosetta.core.pack.task import operation
 
 """
 MDR
-Parallelized, much faster
 for in silico deep mutagenesis
-
-Future:
-Look into partial diffusion as an ensemble generator
 """
 
 
